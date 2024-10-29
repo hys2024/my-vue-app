@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>当前时间：{{ currentTime }}</h1>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      currentTime: this.getCurrentTime()
+    }
+  },
+  mounted() {
+    this.startTime();
+  },
+  methods: {
+    getCurrentTime() {
+      return new Date().toLocaleTimeString();
+    },
+    startTime() {
+      this.currentTime = this.getCurrentTime();
+      setInterval(() => {
+        this.currentTime = this.getCurrentTime();
+      }, 1000);
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 50px;
 }
 </style>
